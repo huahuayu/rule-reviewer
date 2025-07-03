@@ -7,8 +7,6 @@ An open source MCP (Model Context Protocol) server that provides intelligent rul
 - **🔍 Comprehensive Rule Analysis**: Analyzes rule quality, conflicts, and gaps
 - **🔄 Duplicate Detection**: Identifies redundant rules, including those that duplicate Cursor's built-in capabilities
 - **📊 Conflict Resolution**: Detects and provides recommendations for conflicting rules
-- **📝 Multi-format Support**: Handles rules in Markdown, JSON, YAML, and plain text formats
-- **🚀 High Performance**: Efficient processing of large rule sets with concurrent analysis
 - **🔌 MCP Protocol Compliance**: Full MCP v1.0 protocol implementation for seamless integration
 
 ## Installation
