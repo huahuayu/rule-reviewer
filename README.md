@@ -19,12 +19,11 @@ An open source MCP (Model Context Protocol) server that provides intelligent rul
 curl -L https://github.com/huahuayu/rule-reviewer-mcp/releases/latest/download/rule-reviewer-mcp -o /tmp/rule-reviewer-mcp && chmod +x /tmp/rule-reviewer-mcp && sudo mv /tmp/rule-reviewer-mcp /usr/local/bin/rule-reviewer-mcp
 ```
 
-### Prerequisites
-
-- Go 1.24.3 or higher
-- Git
 
 ### Build from Source
+
+Prerequisites
+- Go 1.24.3 or higher
 
 ```bash
 git clone https://github.com/huahuayu/rule-reviewer-mcp.git
