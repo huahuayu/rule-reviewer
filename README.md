@@ -16,7 +16,7 @@ An open source MCP (Model Context Protocol) server that provides intelligent rul
 ### Quick Install (Mac)
 
 ```bash
-curl -L https://github.com/huahuayu/rule-reviewer-mcp/releases/latest/download/rule-reviewer-mcp -o /tmp/rule-reviewer-mcp && chmod +x /tmp/rule-reviewer-mcp && sudo mv /tmp/rule-reviewer-mcp /usr/local/bin/rule-reviewer-mcp
+curl -L https://github.com/huahuayu/rule-reviewer/releases/download/v0.1/rule-reviewer-mcp -o /tmp/rule-reviewer-mcp && chmod +x /tmp/rule-reviewer-mcp && sudo mv /tmp/rule-reviewer-mcp /usr/local/bin/rule-reviewer-mcp
 ```
 
 ### Prerequisites
