@@ -16,7 +16,7 @@ An open source MCP (Model Context Protocol) server that provides intelligent rul
 ### Quick Install (Mac)
 
 ```bash
-curl -L https://github.com/huahuayu/rule-reviewer/releases/download/v0.1/rule-reviewer-mcp -o /tmp/rule-reviewer-mcp && chmod +x /tmp/rule-reviewer-mcp && sudo mv /tmp/rule-reviewer-mcp /usr/local/bin/rule-reviewer-mcp
+curl -L https://github.com/huahuayu/rule-reviewer-mcp/releases/latest/download/rule-reviewer-mcp -o /tmp/rule-reviewer-mcp && chmod +x /tmp/rule-reviewer-mcp && sudo mv /tmp/rule-reviewer-mcp /usr/local/bin/rule-reviewer-mcp
 ```
 
 ### Prerequisites
@@ -31,19 +31,6 @@ git clone https://github.com/huahuayu/rule-reviewer-mcp.git
 cd rule-reviewer-mcp
 go mod download
 go build -o rule-reviewer-mcp
-```
-
-### Cross-platform Builds
-
-```bash
-# Linux
-GOOS=linux GOARCH=amd64 go build -o rule-reviewer-mcp-linux
-
-# macOS
-GOOS=darwin GOARCH=amd64 go build -o rule-reviewer-mcp-macos
-
-# Windows
-GOOS=windows GOARCH=amd64 go build -o rule-reviewer-mcp.exe
 ```
 
 ## Usage
@@ -64,7 +51,7 @@ Add the following to your Cursor MCP configuration:
 {
   "mcpServers": {
     "rule-reviewer": {
-      "command": "/path/to/rule-reviewer-mcp",
+      "command": "/usr/local/bin/rule-reviewer-mcp",
       "args": []
     }
   }
@@ -73,222 +60,8 @@ Add the following to your Cursor MCP configuration:
 
 ### Using the Rule Review Tool
 
-Once configured, you can use the `review_rules` tool in Cursor:
-
-```javascript
-// Example tool call
-{
-  "name": "review_rules",
-  "arguments": {
-    "user_rules": "# My Rules\n- Use camelCase for variables\n- Always handle errors",
-    "project_rules": "# Project Rules\n- Follow Go conventions\n- Use gofmt",
-    "project_context": "Go web API project using fiber framework"
-  }
-}
-```
-
-## Rule Formats
-
-### Markdown Format
-
-```markdown
-# Code Style Rules
-
-## Variable Naming
-- Use camelCase for variables and functions
-- Use PascalCase for types and structs
-
-## Error Handling
-- Always handle errors explicitly
-- Use custom error types for business logic
-```
-
-### JSON Format
-
-```json
-[
-  {
-    "title": "Variable Naming",
-    "content": "Use camelCase for variables and functions",
-    "category": "code_style",
-    "priority": "high"
-  },
-  {
-    "title": "Error Handling",
-    "content": "Always handle errors explicitly",
-    "category": "error_handling",
-    "priority": "high"
-  }
-]
-```
-
-### YAML Format
-
-```yaml
-variable_naming:
-  category: code_style
-  priority: high
-  content: Use camelCase for variables and functions
-
-error_handling:
-  category: error_handling
-  priority: high
-  content: Always handle errors explicitly
-```
-
-### Plain Text Format
-
-```text
-Use camelCase for variables and functions
-Always handle errors explicitly
-Keep functions under 50 lines
-Use descriptive function names
-```
-
-## Analysis Output
-
-The rule review analysis includes:
-
-### Executive Summary
-A brief overview of the rule set health and key findings.
-
-### Critical Issues
-High-priority issues that require immediate attention.
-
-### Conflicts Detected
-Detailed list of conflicting rules with resolution recommendations.
-
-### Duplicate Rules Found
-- Rules that duplicate Cursor's built-in capabilities
-- Inter-rule duplicates with consolidation recommendations
-
-### Missing Rules (Gap Analysis)
-Suggested new rules organized by category:
-- Code style and formatting
-- Architecture and design patterns
-- Testing requirements
-- Documentation standards
-- Security practices
-- Performance considerations
-- Error handling
-- Code review process
-- Deployment and CI/CD
-
-### Improvement Opportunities
-Medium and low priority enhancements.
-
-### Recommended Actions
-Prioritized list of next steps.
-
-## API Reference
-
-### MCP Tool: `review_rules`
-
-Analyzes and reviews user rules and project rules for conflicts, duplicates, and gaps.
-
-**Parameters:**
-- `user_rules` (string, required): User-defined rules in any supported format
-- `project_rules` (string, required): Project-specific rules in any supported format
-- `project_context` (string, optional): Additional context about the project
-
-**Returns:**
-- Comprehensive analysis report in structured markdown format
-
-## Development
-
-### Project Structure
+Once configured, you can use the `review_rules` tool in Cursor by simply input prompt:
 
 ```
-rule-reviewer-mcp/
-├── main.go                 # Entry point and MCP server initialization
-├── internal/
-│   ├── mcp/               # MCP protocol implementation
-│   ├── analyzer/          # Rule analysis logic
-│   └── prompt/            # Prompt template management
-├── pkg/
-│   └── rules/             # Rule parsing and validation
-├── examples/              # Example rule files and usage
-├── docs/                  # Documentation and guides
-├── LICENSE               # Open source license
-├── README.md             # Project documentation
-└── go.mod                # Go module definition
+plz review my cursor rules
 ```
-
-### Running Tests
-
-```bash
-# Run all tests
-go test ./...
-
-# Run tests with coverage
-go test -cover ./...
-
-# Run tests with race detector
-go test -race ./...
-
-# Run benchmarks
-go test -bench=. ./...
-```
-
-### Code Quality
-
-```bash
-# Format code
-go fmt ./...
-
-# Lint code
-go vet ./...
-
-# Static analysis
-golangci-lint run
-```
-
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request
-
-### Code Style
-
-- Follow Go conventions and best practices
-- Use `gofmt` for code formatting
-- Write clear, descriptive commit messages
-- Include tests for new features
-- Update documentation as needed
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-- **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/huahuayu/rule-reviewer-mcp/issues)
-- **Discussions**: Join discussions on [GitHub Discussions](https://github.com/huahuayu/rule-reviewer-mcp/discussions)
-- **Documentation**: Check the [docs](docs/) directory for additional guides
-
-## Roadmap
-
-- [ ] **Rule Templates**: Pre-built rule sets for common project types
-- [ ] **Auto-fixing**: Automated rule conflict resolution
-- [ ] **Integration**: Direct integration with popular linters and formatters
-- [ ] **Metrics**: Rule compliance tracking and reporting
-- [ ] **Web Interface**: Optional web-based UI for rule management
-- [ ] **Plugin System**: Extensible architecture for custom rule processors
-
-## Acknowledgments
-
-- [Model Context Protocol](https://modelcontextprotocol.io/) for the MCP specification
-- [Cursor](https://cursor.sh/) for AI-powered code editing
-- The Go community for excellent tools and libraries
-
----
-
-**Built with ❤️ in Go** | **Open Source** | **MCP Protocol Compliant** 
